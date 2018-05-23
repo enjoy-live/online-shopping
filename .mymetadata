@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hzpxs"
+  id="myeclipse.1408793532451"
+  context-root="/hzpxs"
+  j2ee-spec="5.0"
+  archive="hzpxs.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
