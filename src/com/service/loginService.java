@@ -7,13 +7,22 @@ import javax.servlet.http.HttpSession;
 import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;
 
+import com.dao.GoodRankDao;
 import com.dao.TAdminDAO;
+import com.model.GoodRank;
 import com.model.TAdmin;
 
 public class loginService
 {
 	private TAdminDAO adminDAO;
+	private GoodRankDao goodRankDao;
 	
+	public GoodRankDao getGoodRankDao() {
+		return goodRankDao;
+	}
+	public void setGoodRankDao(GoodRankDao goodRankDao) {
+		this.goodRankDao = goodRankDao;
+	}
 	public TAdminDAO getAdminDAO()
 	{
 		return adminDAO;
@@ -67,6 +76,26 @@ public class loginService
 		{
 			
 		}
+		return result;
+	}
+	
+	public String saleRank(Integer pageNumber, Integer pageSize) {
+		if(pageNumber == null) {
+			pageNumber = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 4;
+		}
+		StringBuffer sql= new StringBuffer("from GoodRank order by saleAmount desc ");
+		sql.append(" limit ").append((pageNumber - 1) * pageSize).append("," + String.valueOf(pageSize));
+		List<GoodRank> goodRankList = goodRankDao.getHibernateTemplate().find(sql.toString());
+		String result="no";
+		WebContext ctx = WebContextFactory.get(); 
+		HttpSession session=ctx.getSession(); 
+		if(goodRankList != null && goodRankList.size() > 0) {
+			result="yes";
+		}
+		session.setAttribute("goodRankList", goodRankList);
 		return result;
 	}
 

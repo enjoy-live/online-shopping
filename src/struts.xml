@@ -122,11 +122,5 @@
         </action>
         <action name="orderShouli" class="buyAction" method="orderShouli">
         </action>
-        
-        
-        
-        
-        
-        
     </package>
 </struts>

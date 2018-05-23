@@ -1,17 +1,13 @@
 package com.action;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.dao.TCatelogDAO;
+import com.dao.GoodRankDao;
 import com.dao.TGoodsDAO;
 import com.dao.TOrderItemDAO;
-import com.model.TGoods;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class indexAction extends ActionSupport
@@ -19,7 +15,6 @@ public class indexAction extends ActionSupport
 	private TGoodsDAO goodsDAO;
 	
 	private TOrderItemDAO orderItemDAO;
-	
 	
 	public String index()
 	{
@@ -33,7 +28,6 @@ public class indexAction extends ActionSupport
 		return ActionSupport.SUCCESS;
 	}
 	
-
 	public TGoodsDAO getGoodsDAO()
 	{
 		return goodsDAO;
@@ -55,6 +49,5 @@ public class indexAction extends ActionSupport
 	{
 		this.orderItemDAO = orderItemDAO;
 	}
-	
 	
 }

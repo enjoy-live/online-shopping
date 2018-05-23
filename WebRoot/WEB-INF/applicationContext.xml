@@ -42,6 +42,7 @@
 			    <value>com/model/TGoods.hbm.xml</value>
 			    <value>com/model/TOrderItem.hbm.xml</value>
 			    <value>com/model/TOrder.hbm.xml</value>
+			    <value>com/model/GoodRank.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -56,11 +57,13 @@
 		</property>
 	</bean>
 	
-	
-	
-	
-	
 	<bean id="TUserDAO" class="com.dao.TUserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	
+	<bean id="goodRankDao" class="com.dao.GoodRankDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"></ref>
 		</property>
@@ -77,6 +80,9 @@
 	<bean id="loginService" class="com.service.loginService">
 		<property name="adminDAO">
 			<ref bean="TAdminDAO" />
+		</property>
+		<property name="goodRankDao">
+			<ref bean="goodRankDao" />
 		</property>
 	</bean>
 	
