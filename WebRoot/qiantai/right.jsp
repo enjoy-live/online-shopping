@@ -51,23 +51,10 @@ String path = request.getContextPath();
 			<div id="sidebar">
 				<div class="box">
 					<div class="box-head">
-						<h2 style="font-family: 微软雅黑">商品
-类别</h2>
+						<h2 style="font-family: 微软雅黑">商品类别</h2>
 					</div>
 					<div class="box-content">
 						<s:action name="catelogAll" executeResult="true" flush="true"></s:action>
-					</div>
-				</div>
-			</div>
-			<div id="sidebar">
-				<div class="box">
-					<div class="box-head">
-						<h2 style="font-family: 微软雅黑">联系我们</h2>
-					</div>
-					<div class="box-content">
-						<p>地址：北京市环海大厦1602</p>
-						<p>电话：13555555555</p>
-						<p>传真：010-4567892</p>
 					</div>
 				</div>
 			</div>
@@ -81,6 +68,18 @@ String path = request.getContextPath();
 					</div>
 					<div class="box-content">
 						<jsp:include flush="true" page="/qiantai/goods/sale.jsp"></jsp:include> 
+					</div>
+				</div>
+			</div>
+			<div id="sidebar">
+				<div class="box">
+					<div class="box-head">
+						<h2 style="font-family: 微软雅黑">联系我们</h2>
+					</div>
+					<div class="box-content">
+						<p>地址：北京市环海大厦1602</p>
+						<p>电话：13555555555</p>
+						<p>传真：010-4567892</p>
 					</div>
 				</div>
 			</div>

@@ -53,13 +53,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div id="content">
 				<!-- 11 -->
-				<div class="box">
+				<div class="content-box">
 					<div class="box-head">
 						<h2 class="left">&nbsp;</h2>
 						<div class="right">
 							&nbsp;
 						</div>
 					</div>
+					<div class="padding-box"></div>
 					<div class="table">
 						<table cellspacing="11" cellpadding="11" align="left">
 				          <tr>
@@ -102,7 +103,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</form>
 				</div> -->
 				<!-- 22 -->
-				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 			</div>
 			

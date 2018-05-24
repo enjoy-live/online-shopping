@@ -156,9 +156,22 @@ textarea.size1 { height:180px; }
 .msg-error p{ background-color:#f3c598; border:solid 1px #e8b084; color:#ba4c32; background-image:url(/hzpxs/images/msg-error.gif);  }
 
 /*** CSS3 ***/
-.box { -moz-border-radius:5px; -webkit-border-radius:5px; -moz-box-shadow: 0 0 6px #978f6c; -webkit-box-shadow: 0 0 6px #978f6c;}
+.box { -moz-border-radius:5px; -webkit-border-radius:5px; -moz-box-shadow: 0 0 8px #978f6c; -webkit-box-shadow: 0 0 6px #978f6c;}
 .box-head { -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; -webkit-border-top-left-radius:5px; -webkit-border-top-right-radius:5px; }
-
+.content-box {
+	background-color: #faebae;height: 700px;-webkit-box-shadow: 0 0 0px #cee2f0;
+}
+.padding-box {
+	    background: #fbfcfc;
+    height: 4%;
+    padding: 1px;
+    margin-top: -1px;
+    -moz-border-radius: 5px;
+    -moz-box-shadow: 0 0 6px #978f6c;
+    -webkit-box-shadow: 0 0 6px #978f6c;
+    -webkit-border-bottom-left-radius: 19px;
+    -webkit-border-bottom-right-radius: 18px;
+}
 .field, .button { -moz-border-radius:4px; -webkit-border-radius:4px; }
 .small-field, .button, .pagging a { -moz-border-radius:3px; -webkit-border-radius:3px; }
 
