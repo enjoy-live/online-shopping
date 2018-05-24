@@ -1,5 +1,7 @@
 package com.action;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -7,13 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.dao.TCatelogDAO;
+import com.dao.GoodRankDao;
 import com.dao.TGoodsDAO;
 import com.dao.TOrderDAO;
 import com.dao.TOrderItemDAO;
+import com.model.GoodRank;
 import com.model.TGoods;
 import com.model.TOrder;
 import com.model.TOrderItem;
@@ -31,6 +35,7 @@ public class buyAction extends ActionSupport
 	private TGoodsDAO goodsDAO;
 	private TOrderDAO orderDAO;
 	private TOrderItemDAO orderItemDAO;
+	private GoodRankDao goodRankDao;
 	
 	private String message;
 	private String path;
@@ -73,11 +78,21 @@ public class buyAction extends ActionSupport
 	public String orderSubmit()
 	{
 		Map session= ServletActionContext.getContext().getSession();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		try {
+			response.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Cart cart = (Cart)session.get("cart");
 		TUser user=(TUser)session.get("user");
+		Date now = new Date();
 		TOrder order=new TOrder();
-		order.setOrderBianhao(new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()));
-		order.setOrderDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+		order.setOrderBianhao(new SimpleDateFormat("yyyyMMddhhmmss").format(now));
+		order.setOrderDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(now));
 		order.setOrderZhuangtai("未受理");//未受理
 		order.setOrderUserId(user.getUserId());
 		order.setOrderJine(cart.getTotalPrice());
@@ -87,21 +102,37 @@ public class buyAction extends ActionSupport
 		
 		orderDAO.save(order);
 		
-		for (Iterator it = cart.getItems().values().iterator(); it.hasNext();)
-		{
-
+		for (Iterator it = cart.getItems().values().iterator(); it.hasNext();) {
+			
 			TOrderItem orderItem = (TOrderItem) it.next();
 			orderItem.setOrderId(order.getOrderId());
 			orderItem.setGoodsId(orderItem.getGoods().getGoodsId());
 			//goodsDAO.getHibernateTemplate().bulkUpdate("update TGoods set goodsKucun=goodsKucun-"+orderItem.getGoodsQuantity() +" where goodsId="+orderItem.getGoods().getGoodsId());
 			orderItemDAO.save(orderItem);
+			String hql = "from GoodRank where goodId = ?";
+			List<GoodRank> result = goodRankDao.getHibernateTemplate().find(hql, orderItem.getGoodsId());
+			if(result == null || result.size() == 0) {
+				TGoods good = (TGoods) goodsDAO.getHibernateTemplate().get(TGoods.class, orderItem.getGoodsId());
+				GoodRank goodRank = new GoodRank();
+				goodRank.setGoodId(good.getGoodsId());
+				goodRank.setGoodImageUrl(good.getGoodsPic());
+				goodRank.setGoodName(good.getGoodsName());
+				goodRank.setGoodPrice(new BigDecimal(good.getGoodsShichangjia()));
+				goodRank.setSaleAmount(orderItem.getGoodsQuantity());
+				goodRank.setCreateDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(now));
+				goodRank.setDeleted(false);
+				goodRankDao.getHibernateTemplate().save(goodRank);
+			}else {
+				GoodRank goodRank = result.get(0);
+				goodRank.setSaleAmount(goodRank.getSaleAmount() + orderItem.getGoodsQuantity());
+				goodRankDao.getHibernateTemplate().update(goodRank);
+			}
+			
 		}
 		
 		cart.getItems().clear();
 		session.put("cart", cart);
-		
-		Map request=(Map)ServletActionContext.getContext().get("request");
-		request.put("order", order);
+		request.setAttribute("order", order);
 		
 		return ActionSupport.SUCCESS;
 		
@@ -347,6 +378,13 @@ public class buyAction extends ActionSupport
 	{
 		this.quantity = quantity;
 	}
-	
+
+	public GoodRankDao getGoodRankDao() {
+		return goodRankDao;
+	}
+
+	public void setGoodRankDao(GoodRankDao goodRankDao) {
+		this.goodRankDao = goodRankDao;
+	}
 
 }

@@ -31,7 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function orderDetail(orderId)
         {
                  var url="<%=path %>/orderDetail.action?orderId="+orderId;
-                 var ret = window.showModalDialog(url,"","dialogWidth:800px; dialogHeight:500px; dialogLeft: status:no; directories:yes;scrollbars:yes;Resizable=no;");
+                 /* var ret = window.showModalDialog(url,"","dialogWidth:800px; dialogHeight:500px; dialogLeft: status:no; directories:yes;scrollbars:yes;Resizable=no;"); */
+                 window.location.href=url;
         }
         </script>
     

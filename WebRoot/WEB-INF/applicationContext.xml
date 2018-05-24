@@ -5,16 +5,31 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
 		</property>
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/db_hzpxs?useUnicode=true&amp;amp;amp;amp;amp;amp;characterEncoding=utf-8">
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost:3306/db_hzpxs?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull</value>
 		</property>
-		<property name="username" value="root"></property><!-- 数据库的连接名 -->
-		<property name="password" value="12345678"></property><!-- 数据库的连接密码，需要改成你自己的 -->
+		<property name="user">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>12345678</value>
+		</property>
+		<property name="minPoolSize">
+			<value>1</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>6</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>1000</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>1</value>
+		</property>
 	</bean>
 	
 	
@@ -185,6 +200,9 @@
 		</property>
 		<property name="orderItemDAO">
 			<ref bean="TOrderItemDAO" />
+		</property>
+		<property name="goodRankDao">
+			<ref bean="goodRankDao" />
 		</property>
 	</bean>
 	
