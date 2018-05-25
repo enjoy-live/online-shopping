@@ -11,3 +11,4 @@
 !.gitignore
 *.war
 *.log
+/.DS_Store
