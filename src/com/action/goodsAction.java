@@ -7,8 +7,12 @@ import org.apache.struts2.ServletActionContext;
 
 import com.dao.TCatelogDAO;
 import com.dao.TGoodsDAO;
+import com.model.GoodRank;
 import com.model.TGoods;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.config.entities.ActionConfig;
+import com.service.loginService;
 
 public class goodsAction extends ActionSupport
 {
@@ -31,6 +35,23 @@ public class goodsAction extends ActionSupport
 	
 	private TGoodsDAO goodsDAO;
 	private TCatelogDAO catelogDAO;
+	private loginService loginService;
+	private Integer goodRankId;
+	
+	public String goodRankList() {
+		List<GoodRank> result = loginService.getGoodRankList(1, 20);
+		Map session = ActionContext.getContext().getSession();
+		session.put("adminGoodRankList", result);
+	    return ActionSupport.SUCCESS;
+	}
+	public String goodRankDel() {
+		GoodRank goodRank = new GoodRank();
+		goodRank.setId(goodRankId);
+		loginService.deleteById(goodRank);
+		this.setMessage("²Ù×÷³É¹¦");
+		this.setPath("goodRankList.action");
+		return "succeed";
+	}
 	
 	public String goodsAdd()
 	{
@@ -287,6 +308,20 @@ public class goodsAction extends ActionSupport
 	public void setCatelogDAO(TCatelogDAO catelogDAO)
 	{
 		this.catelogDAO = catelogDAO;
+	}
+
+	public loginService getLoginService() {
+		return loginService;
+	}
+
+	public void setLoginService(loginService loginService) {
+		this.loginService = loginService;
+	}
+	public Integer getGoodRankId() {
+		return goodRankId;
+	}
+	public void setGoodRankId(Integer goodRankId) {
+		this.goodRankId = goodRankId;
 	}
 	
 }

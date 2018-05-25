@@ -69,8 +69,13 @@
         </action>
         <action name="goodsDel" class="goodsAction" method="goodsDel">
         </action>
+        <action name="goodRankDel" class="goodsAction" method="goodRankDel">
+        </action>
         <action name="goodsMana" class="goodsAction" method="goodsMana">
             <result name="success">/admin/goods/goodsMana.jsp</result>
+        </action>
+         <action name="goodRankList" class="goodsAction" method="goodRankList">
+            <result name="success">/admin/goods/goodRankList.jsp</result>
         </action>
         <action name="goodsDetailHou" class="goodsAction" method="goodsDetailHou">
             <result name="success">/admin/goods/goodsDetailHou.jsp</result>
@@ -89,8 +94,6 @@
         <action name="goodsSearch" class="goodsAction" method="goodsSearch">
             <result name="success">/qiantai/goods/goodsSearch.jsp</result>
         </action>
-        
-        
         
         
         

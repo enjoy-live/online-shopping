@@ -295,10 +295,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- 222 -->
               
               
-              
-              
-              
-              <%-- <!-- 222 -->
+              <!-- 222 -->
               <tr>
 	            <td>
 	            <table width="200" border="0" cellpadding="0" cellspacing="0">
@@ -307,7 +304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <table width="100%" height="26" border="0" cellpadding="0" cellspacing="0">
 		                  <tr>
 		                    <td width="70%" height="26" align="center" valign="bottom">
-		                        <span class="SystemLeft STYLE2"><strong>人员管理</strong></span>
+		                        <span class="SystemLeft STYLE2"><strong>销量排行榜管理</strong></span>
 		                    </td>
 		                    <td width="30%">&nbsp;</td>
 		                  </tr>
@@ -322,15 +319,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						         <img src="<%=path %>/images/left_02_01.gif">
 						      </td>
 						      <td>
-						         <a href="<%=path %>/renyuanMana.action" target="mainFrame">人员管理</a>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td width="36" height="22" align="center">
-						         <img src="<%=path %>/images/left_02_01.gif">
-						      </td>
-						      <td>
-						         <a href="<%=path %>/admin/renyuan/renyuanAdd.jsp" target="mainFrame">添加人员</a>
+						         <a href="<%=path %>/goodRankList.action" target="mainFrame">销量排行榜管理</a>
 						      </td>
 						    </tr>
 						</table>				
@@ -339,7 +328,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            </table>
                 </td>
               </tr>
-              <!-- 222 --> --%>
+              <!-- 222 -->
               
               
               

@@ -167,6 +167,9 @@
 		<property name="catelogDAO">
 			<ref bean="TCatelogDAO" />
 		</property>
+		<property name="loginService">
+			<ref bean="loginService" />
+		</property>
 	</bean>
 	
 	

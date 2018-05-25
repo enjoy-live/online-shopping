@@ -32,7 +32,12 @@ public class loginService
 		this.adminDAO = adminDAO;
 	}
 	
-	
+	public boolean deleteById(GoodRank goodRank){
+		goodRankDao.getHibernateTemplate().delete(goodRank);
+		return true;
+	}
+	public static void main(String[] args) {
+	}
 	
 	public String login(String userName,String userPw,int userType,String rand)
 	{
@@ -97,6 +102,19 @@ public class loginService
 		}
 		session.setAttribute("goodRankList", goodRankList);
 		return result;
+	}
+	
+	public List<GoodRank> getGoodRankList(Integer pageNumber, Integer pageSize) {
+		if(pageNumber == null) {
+			pageNumber = 1;
+		}
+		if(pageSize == null) {
+			pageSize = 4;
+		}
+		StringBuffer sql= new StringBuffer("from GoodRank order by saleAmount desc ");
+		sql.append(" limit ").append((pageNumber - 1) * pageSize).append("," + String.valueOf(pageSize));
+		List<GoodRank> goodRankList = goodRankDao.getHibernateTemplate().find(sql.toString());
+		return goodRankList;
 	}
 
     public String adminPwEdit(String userPwNew)

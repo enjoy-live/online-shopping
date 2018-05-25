@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -25,15 +26,21 @@ public class upload extends ActionSupport
 	
 	public String upload()
 	{
-		String newFujianName=new Date().getTime()+fujianFileName.substring(fujianFileName.indexOf("."));
-		String dstPath = ServletActionContext.getServletContext().getRealPath("upload")+ "\\" + newFujianName;
-		File dstFile = new File(dstPath);
-		copy(this.getFujian(),dstFile);
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		String fileName = uuid + fujianFileName;
+		String basePath = upload.class.getClassLoader().getResource(".").getPath().replaceAll("/WEB-INF/classes", "");
+		String destPath = basePath + "upload/" + fileName;
+		File destFile = new File(destPath);
+		upload.copy(fujian, destFile);
 		Map request=(Map)ServletActionContext.getContext().get("request");
-		request.put("newFujianName", newFujianName);
+		request.put("newFujianName", fileName);
 		request.put("oldFujianName", fujianFileName);
-		request.put("fujianPath", "/upload"+ "/" + newFujianName);
+		request.put("fujianPath", "/upload"+ "/" + fileName);
 		return ActionSupport.SUCCESS;
+	}
+	public static void main(String[] args) {
+//		String string = UUID.randomUUID().toString().replaceAll("-", "");
+//		System.out.println(string);
 	}
 	
 	
@@ -82,7 +89,6 @@ public class upload extends ActionSupport
             }
         }
     }
-
 
 	public File getFujian()
 	{
